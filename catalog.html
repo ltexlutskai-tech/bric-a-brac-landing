@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Каталог L-TEX — Bric-a-Brac оптом з Великобританії. Актуальні ціни, відеоогляди, замовлення онлайн.">
+<title>Каталог Bric-a-Brac — L-TEX Опт</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --green: #4CAF50;
+    --green-dark: #388E3C;
+    --green-light: #81C784;
+    --black: #111111;
+    --dark: #1a1a1a;
+    --dark2: #222222;
+    --gray: #f5f5f5;
+    --gray2: #e0e0e0;
+    --text: #333333;
+    --white: #ffffff;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Nunito', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--black);
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 3px; }
+
+  /* ─── PROMO BANNER ─── */
+  .promo-banner {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .promo-banner-scroll {
+    display: flex;
+    animation: scroll-promo 25s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes scroll-promo {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .promo-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    white-space: nowrap;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .promo-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .promo-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.3px;
+  }
+
+  @media (max-width: 768px) {
+    .promo-item { padding: 10px 24px; }
+    .promo-text { font-size: 12px; }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(17,17,17,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--green);
+  }
+
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-box {
+    background: var(--green);
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo-l { font-family: var(--font-body); font-weight: 900; font-size: 22px; color: white; }
+  .nav-logo-tex { font-family: var(--font-body); font-weight: 900; font-size: 22px; color: var(--black); }
+
+  .nav-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .nav-breadcrumb a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-breadcrumb a:hover { color: var(--green); }
+  .nav-breadcrumb span { color: rgba(255,255,255,0.6); font-weight: 700; }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(76,175,80,0.35);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.2);
+    padding: 8px 16px;
+  }
+  .btn-outline:hover { border-color: var(--green); color: var(--green); }
+
+  /* ─── HERO ─── */
+  .catalog-hero {
+    background: var(--black);
+    padding: 56px 0 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .catalog-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 600px; height: 100%;
+    background: radial-gradient(ellipse 70% 80% at 100% 50%, rgba(76,175,80,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .catalog-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(76,175,80,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(76,175,80,0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+  }
+
+  .catalog-hero-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .catalog-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(76,175,80,0.12);
+    border: 1px solid rgba(76,175,80,0.25);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--green-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  .catalog-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 72px);
+    color: white;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .catalog-hero-title span { color: var(--green); }
+
+  .catalog-hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    max-width: 560px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .catalog-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .catalog-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 600;
+  }
+
+  .catalog-stat-icon {
+    width: 28px; height: 28px;
+    background: rgba(76,175,80,0.12);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  /* ─── FILTERS ─── */
+  .filters-bar {
+    background: var(--dark);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: sticky;
+    top: 68px;
+    z-index: 900;
+  }
+
+  .filters-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .filter-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.3);
+    flex-shrink: 0;
+  }
+
+  .filter-btn {
+    padding: 7px 16px;
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: transparent;
+    color: rgba(255,255,255,0.55);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover {
+    border-color: rgba(76,175,80,0.4);
+    color: var(--green-light);
+  }
+
+  .filter-btn.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+
+  .filters-search {
+    margin-left: auto;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .filters-search input {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 8px 14px 8px 36px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: white;
+    outline: none;
+    width: 220px;
+    transition: all 0.2s;
+  }
+
+  .filters-search input:focus {
+    border-color: var(--green);
+    background: rgba(76,175,80,0.06);
+  }
+
+  .filters-search input::placeholder { color: rgba(255,255,255,0.25); }
+
+  .filters-search-icon {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.25);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  /* ─── CATALOG GRID ─── */
+  .catalog-section {
+    padding: 40px 0 80px;
+  }
+
+  .catalog-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .catalog-count {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+
+  .catalog-count span { color: var(--green); font-weight: 800; }
+
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  /* ─── PRODUCT CARD ─── */
+  .product-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card:hover {
+    border-color: rgba(76,175,80,0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(76,175,80,0.1);
+  }
+
+  .product-card-header {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .product-code {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--green);
+    background: rgba(76,175,80,0.1);
+    border: 1px solid rgba(76,175,80,0.2);
+    padding: 3px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .product-id {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .product-card-body {
+    padding: 16px 20px;
+    flex: 1;
+  }
+
+  .product-name {
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .product-description {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .product-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .product-tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .product-tag.origin-uk { color: #64B5F6; border-color: rgba(100,181,246,0.2); background: rgba(100,181,246,0.06); }
+  .product-tag.origin-sc { color: #CE93D8; border-color: rgba(206,147,216,0.2); background: rgba(206,147,216,0.06); }
+  .product-tag.special-size { color: #FFD54F; border-color: rgba(255,213,79,0.2); background: rgba(255,213,79,0.06); }
+  .product-tag.special-christmas { color: #EF9A9A; border-color: rgba(239,154,154,0.2); background: rgba(239,154,154,0.06); }
+
+  .product-pricing {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .product-price-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+
+  .product-price-value {
+    font-family: var(--font-display);
+    font-size: 42px;
+    color: white;
+    line-height: 1;
+  }
+
+  .product-price-unit {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 600;
+    margin-left: 4px;
+  }
+
+  .product-card-footer {
+    padding: 14px 20px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .product-btn {
+    flex: 1;
+    padding: 11px 12px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .product-btn-order {
+    background: var(--green);
+    color: white;
+  }
+  .product-btn-order:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+  .product-btn-video {
+    background: #FF0000;
+    color: white;
+    border: none;
+    flex: 0 0 auto;
+    padding: 11px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+  .product-btn-video:hover {
+    background: #cc0000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(255,0,0,0.4);
+    color: white;
+  }
+
+  .product-btn-video.no-video {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  .no-video-wrap { position: relative; }
+  .no-video-wrap:hover::after {
+    content: 'Відео відсутнє';
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dark);
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.1);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* ─── EMPTY STATE ─── */
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: rgba(255,255,255,0.25);
+    display: none;
+  }
+
+  .empty-state-icon { font-size: 48px; margin-bottom: 16px; }
+  .empty-state-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .empty-state-desc { font-size: 14px; }
+
+  /* ─── ORDER MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--dark);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 36px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    animation: modalIn 0.3s ease;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.06);
+    border: none;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.1); color: white; }
+
+  .modal-product-info {
+    background: rgba(76,175,80,0.06);
+    border: 1px solid rgba(76,175,80,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+
+  .modal-product-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .modal-product-price {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--green);
+  }
+
+  .modal-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: white;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+  .form-group select option { background: #333; }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--green);
+    background: rgba(76,175,80,0.04);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .modal-submit {
+    width: 100%;
+    padding: 14px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .modal-submit:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(76,175,80,0.3);
+  }
+
+  .modal-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .modal-note a { color: var(--green); text-decoration: none; }
+
+  /* ─── BOTTOM CTA ─── */
+  .bottom-cta {
+    background: var(--green);
+    padding: 60px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bottom-cta::before {
+    content: '';
+    position: absolute;
+    top: -60%; left: -5%;
+    width: 350px; height: 350px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .bottom-cta-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .bottom-cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    color: white;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+
+  .bottom-cta-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 28px;
+  }
+
+  .bottom-cta-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-white {
+    background: white;
+    color: var(--green-dark);
+    font-size: 15px;
+    padding: 14px 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .btn-white:hover { background: var(--gray); transform: translateY(-2px); }
+
+  .btn-outline-white {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.4);
+    font-size: 15px;
+    padding: 14px 28px;
+  }
+  .btn-outline-white:hover { border-color: white; transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 0;
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-brand {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: white;
+  }
+
+  .footer-brand span { color: var(--green); }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--green); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    margin-top: 16px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .nav-breadcrumb { display: none; }
+
+    .catalog-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .filters-inner {
+      gap: 8px;
+    }
+
+    .filters-search { margin-left: 0; width: 100%; }
+    .filters-search input { width: 100%; }
+
+    .modal { padding: 24px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-right .btn-outline { display: none; }
+    .bottom-cta-btns { flex-direction: column; align-items: center; }
+  }
+
+  /* ─── REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-box">
+        <span class="nav-logo-l">L</span><span class="nav-logo-tex">TEX</span>
+      </div>
+    </a>
+
+    <div class="nav-breadcrumb">
+      <a href="index.html">Головна</a>
+      <span>›</span>
+      <span>Каталог Bric-a-Brac</span>
+    </div>
+
+    <div class="nav-right">
+      <a href="index.html" class="btn btn-outline" style="font-size:13px; padding:8px 14px;">
+        ← На головну
+      </a>
+      <a href="#order-form" class="btn btn-primary" onclick="openModal(null, event)">
+        📞 Замовити
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     PROMO BANNER
+═══════════════════════════════════════════ -->
+<div class="promo-banner">
+  <div class="promo-banner-scroll">
+    <div class="promo-item">
+      <span class="promo-icon">🆕</span>
+      <span class="promo-text">Нові поступлення щомісяця</span>
+    </div>
+    <div class="promo-item">
+      <span class="promo-icon">🔥</span>
+      <span class="promo-text">Знижки до -0,6€/кг за об'єм</span>
+    </div>
+    <div class="promo-item">
+      <span class="promo-icon">📱</span>
+      <span class="promo-text">Прямі ефіри в TikTok щотижня</span>
+    </div>
+    <div class="promo-item">
+      <span class="promo-icon">🎥</span>
+      <span class="promo-text">Відеоогляди всіх лотів на YouTube</span>
+    </div>
+    <!-- Duplicate for seamless loop -->
+    <div class="promo-item">
+      <span class="promo-icon">🆕</span>
+      <span class="promo-text">Нові поступлення щомісяця</span>
+    </div>
+    <div class="promo-item">
+      <span class="promo-icon">🔥</span>
+      <span class="promo-text">Знижки до -0,6€/кг за об'єм</span>
+    </div>
+    <div class="promo-item">
+      <span class="promo-icon">📱</span>
+      <span class="promo-text">Прямі ефіри в TikTok щотижня</span>
+    </div>
+    <div class="promo-item">
+      <span class="promo-icon">🎥</span>
+      <span class="promo-text">Відеоогляди всіх лотів на YouTube</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ─── HERO ─── -->
+<section class="catalog-hero">
+  <div class="catalog-hero-inner">
+    <div class="catalog-hero-badge">📦 Актуальні ціни · Оновлено</div>
+    <h1 class="catalog-hero-title">Каталог<br><span>Bric-a-Brac</span></h1>
+    <p class="catalog-hero-sub">
+      Весь асортимент UK Bric-a-Brac від L-TEX. Натисніть ▶ щоб переглянути відео лоту або «Замовити» для швидкої заявки.
+    </p>
+    <div class="catalog-stats">
+      <div class="catalog-stat">
+        <div class="catalog-stat-icon">📦</div>
+        <span>8 позицій в каталозі</span>
+      </div>
+      <div class="catalog-stat">
+        <div class="catalog-stat-icon">🇬🇧</div>
+        <span>Англія та Шотландія</span>
+      </div>
+      <div class="catalog-stat">
+        <div class="catalog-stat-icon">⚡</div>
+        <span>Відправка в день замовлення</span>
+      </div>
+      <div class="catalog-stat">
+        <div class="catalog-stat-icon">🎥</div>
+        <span>Відеоогляди на YouTube</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FILTERS ─── -->
+<div class="filters-bar">
+  <div class="filters-inner">
+    <span class="filter-label">Фільтр:</span>
+    <button class="filter-btn active" data-filter="all">Всі (8)</button>
+    <button class="filter-btn" data-filter="bric">Bric-a-Brac (6)</button>
+    <button class="filter-btn" data-filter="christmas">🎄 Новорічний (1)</button>
+    <button class="filter-btn" data-filter="scotland">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Шотландія (1)</button>
+    <button class="filter-btn" data-filter="size">📐 Габарит (1)</button>
+
+    <div class="filters-search">
+      <span class="filters-search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Пошук за назвою...">
+    </div>
+  </div>
+</div>
+
+
+<!-- ─── CATALOG ─── -->
+<section class="catalog-section">
+  <div class="catalog-inner">
+    <div class="catalog-count" id="catalogCount">
+      Показано <span id="countNum">8</span> позицій
+    </div>
+
+    <div class="catalog-grid" id="catalogGrid">
+
+      <!-- CARD 1: Bric a Brac -->
+      <div class="product-card" data-category="bric" data-name="bric a brac">
+        <div class="product-card-header">
+          <div>
+            <div class="product-code">Bric a Brac</div>
+            <div class="product-id"># 1191</div>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <div class="product-name">Bric a Brac</div>
+          <div class="product-description">Товари для дому, офісу, іграшки, порцеляна. Класичний асортимент UK Bric-a-Brac.</div>
+          <div class="product-meta">
+            <span class="product-tag origin-uk">🇬🇧 Англія</span>
+          </div>
+        </div>
+        <div class="product-pricing">
+          <div>
+            <div class="product-price-label">Ціна</div>
+            <div style="display:flex; align-items:baseline;">
+              <div class="product-price-value">3.4</div>
+              <span class="product-price-unit">€/кг</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card-footer">
+          <button class="product-btn product-btn-order"
+                  onclick="openModal({name:'Bric a Brac (1191)', price:'3.4€/кг', code:'Bric a Brac'})">
+            📦 Замовити
+          </button>
+          <a href="https://www.youtube.com/playlist?list=PL6gwWuwZT8pEF3_SEP4EVV-2V0k-k8iwX"
+             target="_blank" rel="noopener" class="product-btn product-btn-video">▶</a>
+        </div>
+      </div>
+
+      <!-- CARD 2: Bric a Brac C2R -->
+      <div class="product-card" data-category="bric" data-name="bric a brac c2r">
+        <div class="product-card-header">
+          <div>
+            <div class="product-code">Bric a Brac C2R</div>
+            <div class="product-id"># 1794</div>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <div class="product-name">Bric a Brac C2R</div>
+          <div class="product-description">Товари для дому, офісу, іграшки, порцеляна. Популярна категорія.</div>
+          <div class="product-meta">
+            <span class="product-tag origin-uk">🇬🇧 Англія</span>
+          </div>
+        </div>
+        <div class="product-pricing">
+          <div>
+            <div class="product-price-label">Ціна</div>
+            <div style="display:flex; align-items:baseline;">
+              <div class="product-price-value">3.2</div>
+              <span class="product-price-unit">€/кг</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card-footer">
+          <button class="product-btn product-btn-order"
+                  onclick="openModal({name:'Bric a Brac C2R (1794)', price:'3.2€/кг', code:'Bric a Brac C2R'})">
+            📦 Замовити
+          </button>
+          <a href="https://www.youtube.com/playlist?list=PL6gwWuwZT8pFqBKsJ_VdZKY4x6zpKhFFK"
+             target="_blank" rel="noopener" class="product-btn product-btn-video">▶</a>
+        </div>
+      </div>
+
+      <!-- CARD 3: Bric a Brac C2R XXL (Габарит) -->
+      <div class="product-card" data-category="bric size" data-name="bric a brac c2r xxl габарит">
+        <div class="product-card-header">
+          <div>
+            <div class="product-code">Bric a Brac C2R XXL</div>
+            <div class="product-id"># 1889</div>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <div class="product-name">Bric a Brac C2R XXL — Габарит</div>
+          <div class="product-description">Товари для дому, офісу, іграшки, порцеляна. Великі габаритні коробки — більше товару.</div>
+          <div class="product-meta">
+            <span class="product-tag origin-uk">🇬🇧 Англія</span>
+            <span class="product-tag special-size">📐 Габарит</span>
+          </div>
+        </div>
+        <div class="product-pricing">
+          <div>
+            <div class="product-price-label">Ціна</div>
+            <div style="display:flex; align-items:baseline;">
+              <div class="product-price-value">2.9</div>
+              <span class="product-price-unit">€/кг</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card-footer">
+          <button class="product-btn product-btn-order"
+                  onclick="openModal({name:'Bric a Brac C2R XXL Габарит (1889)', price:'2.9€/кг', code:'Bric a Brac C2R XXL'})">
+            📦 Замовити
+          </button>
+          <div class="no-video-wrap">
+            <button class="product-btn product-btn-video no-video">▶</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: Bric a Brac C2R+ -->
+      <div class="product-card" data-category="bric" data-name="bric a brac c2r+">
+        <div class="product-card-header">
+          <div>
+            <div class="product-code">Bric a Brac C2R+</div>
+            <div class="product-id"># 1795</div>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <div class="product-name">Bric a Brac C2R+</div>
+          <div class="product-description">Товари для дому, офісу, іграшки, порцеляна. Покращена категорія якості.</div>
+          <div class="product-meta">
+            <span class="product-tag origin-uk">🇬🇧 Англія</span>
+          </div>
+        </div>
+        <div class="product-pricing">
+          <div>
+            <div class="product-price-label">Ціна</div>
+            <div style="display:flex; align-items:baseline;">
+              <div class="product-price-value">3.8</div>
+              <span class="product-price-unit">€/кг</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card-footer">
+          <button class="product-btn product-btn-order"
+                  onclick="openModal({name:'Bric a Brac C2R+ (1795)', price:'3.8€/кг', code:'Bric a Brac C2R+'})">
+            📦 Замовити
+          </button>
+          <a href="https://www.youtube.com/playlist?list=PL6gwWuwZT8pE6VbeGHBjKPBQHxs8u08oY"
+             target="_blank" rel="noopener" class="product-btn product-btn-video">▶</a>
+        </div>
+      </div>
+
+      <!-- CARD 5: Bric a Brac C2R+ NY (Новорічний) -->
+      <div class="product-card" data-category="bric christmas" data-name="bric a brac c2r+ ny новорічний">
+        <div class="product-card-header">
+          <div>
+            <div class="product-code">Bric a Brac C2R+ NY</div>
+            <div class="product-id"># 1888</div>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <div class="product-name">Bric a Brac C2R+ NEW YEAR 🎄</div>
+          <div class="product-description">Новорічні прикраси, ілюмінація, декорація. Сезонний товар — встигніть замовити!</div>
+          <div class="product-meta">
+            <span class="product-tag origin-uk">🇬🇧 Англія</span>
+            <span class="product-tag special-christmas">🎄 Новорічний</span>
+          </div>
+        </div>
+        <div class="product-pricing">
+          <div>
+            <div class="product-price-label">Ціна</div>
+            <div style="display:flex; align-items:baseline;">
+              <div class="product-price-value">4.2</div>
+              <span class="product-price-unit">€/кг</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card-footer">
+          <button class="product-btn product-btn-order"
+                  onclick="openModal({name:'Bric a Brac C2R+ NEW YEAR (1888)', price:'4.2€/кг', code:'Bric a Brac C2R+ NY'})">
+            📦 Замовити
+          </button>
+          <a href="https://www.youtube.com/playlist?list=PL6gwWuwZT8pE6VbeGHBjKPBQHxs8u08oY"
+             target="_blank" rel="noopener" class="product-btn product-btn-video">▶</a>
+        </div>
+      </div>
+
+      <!-- CARD 6: Bric a Brac FN (Шотландія) -->
+      <div class="product-card" data-category="bric scotland" data-name="bric a brac fn шотландія">
+        <div class="product-card-header">
+          <div>
+            <div class="product-code">Bric a Brac FN</div>
+            <div class="product-id"># 1793</div>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <div class="product-name">Bric a Brac FN 🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+          <div class="product-description">Товари для дому, офісу, іграшки, порцеляна. Шотландія — преміум якість з півночі Великобританії.</div>
+          <div class="product-meta">
+            <span class="product-tag origin-sc">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Шотландія</span>
+          </div>
+        </div>
+        <div class="product-pricing">
+          <div>
+            <div class="product-price-label">Ціна</div>
+            <div style="display:flex; align-items:baseline;">
+              <div class="product-price-value">4.2</div>
+              <span class="product-price-unit">€/кг</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card-footer">
+          <button class="product-btn product-btn-order"
+                  onclick="openModal({name:'Bric a Brac FN Шотландія (1793)', price:'4.2€/кг', code:'Bric a Brac FN'})">
+            📦 Замовити
+          </button>
+          <a href="https://www.youtube.com/playlist?list=PL6gwWuwZT8pEtwHfhN-xwaeedzPD03bAb"
+             target="_blank" rel="noopener" class="product-btn product-btn-video">▶</a>
+        </div>
+      </div>
+
+
+
+      <!-- CARD 8: Bric a Brac + -->
+      <div class="product-card" data-category="bric" data-name="bric a brac +">
+        <div class="product-card-header">
+          <div>
+            <div class="product-code">Bric a Brac +</div>
+            <div class="product-id"># 1701</div>
+          </div>
+        </div>
+        <div class="product-card-body">
+          <div class="product-name">Bric a Brac +</div>
+          <div class="product-description">Товари для дому, офісу, іграшки, порцеляна. Покращений асортимент для вашого бізнесу.</div>
+          <div class="product-meta">
+            <span class="product-tag origin-uk">🇬🇧 Англія</span>
+          </div>
+        </div>
+        <div class="product-pricing">
+          <div>
+            <div class="product-price-label">Ціна</div>
+            <div style="display:flex; align-items:baseline;">
+              <div class="product-price-value">3.6</div>
+              <span class="product-price-unit">€/кг</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card-footer">
+          <button class="product-btn product-btn-order"
+                  onclick="openModal({name:'Bric a Brac + (1701)', price:'3.6€/кг', code:'Bric a Brac +'})">
+            📦 Замовити
+          </button>
+          <a href="https://www.youtube.com/playlist?list=PL6gwWuwZT8pFyGNOag9L2ctnIPYDpdk_x"
+             target="_blank" rel="noopener" class="product-btn product-btn-video">▶</a>
+        </div>
+      </div>
+
+    </div><!-- /catalog-grid -->
+
+    <div class="empty-state" id="emptyState">
+      <div class="empty-state-icon">🔍</div>
+      <div class="empty-state-title">Нічого не знайдено</div>
+      <div class="empty-state-desc">Спробуйте інший пошуковий запит або фільтр</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─── BOTTOM CTA ─── -->
+<div class="bottom-cta">
+  <div class="bottom-cta-inner">
+    <h2 class="bottom-cta-title">Не знайшли що шукали?</h2>
+    <p class="bottom-cta-sub">Зв'яжіться з менеджером — підберемо ідеальний лот під ваш бізнес і бюджет</p>
+    <div class="bottom-cta-btns">
+      <a href="https://t.me/+380677056903" target="_blank" class="btn btn-white">
+        ✈️ Написати в Telegram
+      </a>
+      <a href="tel:+380677056903" class="btn btn-outline-white">
+        📞 +38 (067) 705-69-03
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">L<span>TEX</span></div>
+    <div class="footer-links">
+      <a href="index.html">← Головна</a>
+      <a href="https://www.youtube.com/@L-TEX_Second_Stok" target="_blank">YouTube</a>
+      <a href="https://t.me/+380677056903" target="_blank">Telegram</a>
+      <a href="tel:+380677056903">+38 (067) 705-69-03</a>
+    </div>
+  </div>
+  <div class="footer-inner">
+    <div class="footer-copy">© 2025 L-TEX. Каталог Bric-a-Brac — оптові поставки з Великобританії</div>
+  </div>
+</footer>
+
+
+<!-- ─── ORDER MODAL ─── -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div class="modal-title">📦 Замовити товар</div>
+
+    <div class="modal-product-info" id="modalProductInfo">
+      <div class="modal-product-name" id="modalProductName">Bric a Brac</div>
+      <div class="modal-product-price" id="modalProductPrice">3.4€/кг</div>
+    </div>
+
+    <form id="modalForm" action="https://formspree.io/f/xvzbkvvp" method="POST" novalidate>
+      <input type="hidden" id="modalProductCode" name="product_code">
+      <input type="hidden" id="modalProductNameHidden" name="product_name">
+      <input type="hidden" id="modalProductPriceHidden" name="product_price">
+      <input type="hidden" name="_subject" value="Замовлення з каталогу L-TEX">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="mName">Ім'я *</label>
+          <input type="text" id="mName" name="name" placeholder="Ваше ім'я" required>
+        </div>
+        <div class="form-group">
+          <label for="mPhone">Телефон *</label>
+          <input type="tel" id="mPhone" name="phone" placeholder="+380__________" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="mMessenger">Telegram або Viber</label>
+        <input type="text" id="mMessenger" name="messenger" placeholder="@username або номер">
+      </div>
+
+      <div class="form-group">
+        <label for="mVolume">Об'єм замовлення *</label>
+        <select id="mVolume" name="volume" required>
+          <option value="" disabled selected>Оберіть кількість</option>
+          <option value="1 коробка (15-20 кг)">1 коробка (15-20 кг)</option>
+          <option value="Палета M (~10 коробок)">Палета M (~10 коробок)</option>
+          <option value="Палета L (~20 коробок)">Палета L (~20 коробок)</option>
+          <option value="Палета XL (~30 коробок)">Палета XL (~30 коробок)</option>
+          <option value="Більше 1 тони">Більше 1 тони</option>
+          <option value="Фура">Фура (24-36 палет)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="mComment">Коментар</label>
+        <textarea id="mComment" name="comment" rows="2" placeholder="Регіон доставки, додаткові побажання..."></textarea>
+      </div>
+
+      <button type="submit" class="modal-submit" id="modalSubmitBtn">
+        <span id="modalBtnText">📧 Надіслати заявку</span>
+      </button>
+
+      <p class="modal-note">
+        Або телефонуйте:
+        <a href="tel:+380677056903">+38 (067) 705-69-03</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+
+<script>
+  // ─── MODAL ───
+  let currentProduct = null;
+
+  function openModal(product, e) {
+    if (e) e.preventDefault();
+    currentProduct = product;
+
+    if (product) {
+      document.getElementById('modalProductName').textContent = product.name;
+      document.getElementById('modalProductPrice').textContent = product.price;
+      document.getElementById('modalProductCode').value = product.code;
+      document.getElementById('modalProductNameHidden').value = product.name;
+      document.getElementById('modalProductPriceHidden').value = product.price;
+      document.getElementById('modalProductInfo').style.display = 'block';
+    } else {
+      document.getElementById('modalProductInfo').style.display = 'none';
+    }
+
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modalOverlay').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Form submit → Formspree
+  document.getElementById('modalForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('mName').value.trim();
+    const phone = document.getElementById('mPhone').value.trim();
+    const volume = document.getElementById('mVolume').value;
+
+    if (!name || !phone || !volume) {
+      [document.getElementById('mName'), document.getElementById('mPhone'), document.getElementById('mVolume')]
+        .forEach(el => {
+          if (!el.value.trim()) {
+            el.style.borderColor = '#EF5350';
+            setTimeout(() => { el.style.borderColor = ''; }, 3000);
+          }
+        });
+      return;
+    }
+
+    const btn = document.getElementById('modalSubmitBtn');
+    const btnText = document.getElementById('modalBtnText');
+
+    btnText.textContent = '⏳ Надсилаємо...';
+    btn.disabled = true;
+
+    const form = document.getElementById('modalForm');
+    const data = new FormData(form);
+    // Add name inputs that don't have name attr
+    data.set('name', name);
+    data.set('phone', phone);
+    data.set('messenger', document.getElementById('mMessenger').value.trim());
+    data.set('volume', volume);
+    data.set('comment', document.getElementById('mComment').value.trim());
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        btnText.textContent = '✅ Заявку надіслано!';
+        btn.style.background = '#388E3C';
+        setTimeout(() => {
+          closeModal();
+          document.getElementById('modalForm').reset();
+          btnText.textContent = '📧 Надіслати заявку';
+          btn.disabled = false;
+          btn.style.background = '';
+        }, 2500);
+      } else {
+        btnText.textContent = '❌ Помилка. Спробуйте ще';
+        btn.disabled = false;
+      }
+    } catch {
+      btnText.textContent = '❌ Помилка. Спробуйте ще';
+      btn.disabled = false;
+    }
+  });
+
+  // ─── FILTER ───
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.product-card');
+  const searchInput = document.getElementById('searchInput');
+  const countNum = document.getElementById('countNum');
+  const emptyState = document.getElementById('emptyState');
+
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  function applyFilters() {
+    let visible = 0;
+
+    cards.forEach(card => {
+      const category = card.dataset.category || '';
+      const name = card.dataset.name || '';
+
+      const matchesFilter = activeFilter === 'all' || category.includes(activeFilter);
+      const matchesSearch = !searchQuery || name.includes(searchQuery.toLowerCase());
+
+      if (matchesFilter && matchesSearch) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    countNum.textContent = visible;
+    emptyState.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value.trim().toLowerCase();
+    applyFilters();
+  });
+
+  // ─── SCROLL ANIMATIONS ───
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
