@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bricabrac.com.ua/</loc>
-    <lastmod>2026-02-24</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,21 +12,45 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-    <url>
-    <loc>https://bricabrac.com.ua/blog/shcho-take-bric-a-brac.html</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
   <url>
     <loc>https://bricabrac.com.ua/blog/</loc>
-    <lastmod>2026-02-25</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bricabrac.com.ua/blog/brik-brak-shcho-tse-take.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bricabrac.com.ua/blog/shcho-take-bric-a-brac.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://bricabrac.com.ua/blog/tiktok-striminh-bric-a-brac.html</loc>
     <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bricabrac.com.ua/blog/yak-obraty-postachalnyka-sekond-hendu.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bricabrac.com.ua/blog/biznes-na-sekond-hendi-z-nulya.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bricabrac.com.ua/blog/posud-z-yevropy-optom.html</loc>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
