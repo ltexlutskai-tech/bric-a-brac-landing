@@ -596,124 +596,151 @@ function gtag_report_conversion() {
     margin-bottom: 56px;
   }
 
-  .assr-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+  .assr-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 32px;
   }
 
-  .assr-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+  .assr-tab {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.6);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .assr-tab:hover {
+    background: rgba(76,175,80,0.15);
+    border-color: rgba(76,175,80,0.3);
+    color: white;
+  }
+
+  .assr-tab.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+
+  .assr-gallery {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
     border-radius: 16px;
     overflow: hidden;
-    transition: all 0.3s ease;
-    cursor: default;
+    background: #000;
+    border: 1px solid rgba(255,255,255,0.08);
   }
 
-  .assr-card:hover {
-    border-color: rgba(76,175,80,0.4);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(76,175,80,0.15);
-  }
-
-  .assr-card.featured {
-    grid-column: span 2;
-  }
-
-  .assr-img {
-    aspect-ratio: 16/9;
-    background: rgba(255,255,255,0.06);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: rgba(255,255,255,0.25);
-    font-size: 13px;
-    font-weight: 600;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+  .assr-gallery-wrap {
     position: relative;
+    width: 100%;
+    padding-bottom: 66.66%;
     overflow: hidden;
   }
 
-  .assr-img-featured { aspect-ratio: 16/7; }
-
-  .assr-img-icon { font-size: 40px; opacity: 0.4; }
-
-  .assr-percent {
+  .assr-gallery-track {
     position: absolute;
-    top: 12px; right: 12px;
-    background: var(--green);
-    color: white;
-    font-size: 11px;
-    font-weight: 800;
-    padding: 4px 10px;
-    border-radius: 100px;
-  }
-
-  .assr-body {
-    padding: 20px;
-  }
-
-  .assr-name {
-    font-size: 16px;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 6px;
-  }
-
-  .assr-desc {
-    font-size: 13px;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.5;
-  }
-
-  .assr-tags {
+    top: 0; left: 0;
     display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 12px;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.4s ease;
   }
 
-  .assr-tag {
-    background: rgba(76,175,80,0.15);
-    color: var(--green-light);
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 100px;
-    border: 1px solid rgba(76,175,80,0.2);
+  .assr-gallery-slide {
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    flex-shrink: 0;
   }
 
-  .assr-special {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-top: 16px;
-  }
-
-  .assr-special-item {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(76,175,80,0.2);
-    border-radius: 10px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .assr-special-icon { font-size: 24px; }
-
-  .assr-special-name {
-    font-size: 13px;
-    font-weight: 700;
+  .assr-gallery-counter {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: rgba(0,0,0,0.6);
     color: white;
-  }
-
-  .assr-special-desc {
     font-size: 12px;
-    color: rgba(255,255,255,0.4);
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+  }
+
+  .assr-gallery-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 32px 16px 14px;
+    z-index: 10;
+    text-align: center;
+  }
+
+  /* ─── WAREHOUSE GALLERY ─── */
+  .warehouse {
+    background: var(--gray);
+    padding: 100px 0;
+  }
+
+  .warehouse-gallery {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  }
+
+  .warehouse-gallery-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 66.66%;
+    overflow: hidden;
+  }
+
+  .warehouse-gallery-track {
+    position: absolute;
+    top: 0; left: 0;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.4s ease;
+  }
+
+  .warehouse-gallery-slide {
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    flex-shrink: 0;
+  }
+
+  .warehouse-counter {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    z-index: 10;
+    backdrop-filter: blur(4px);
   }
 
   /* ─── HOW IT WORKS ─── */
@@ -1615,8 +1642,7 @@ function gtag_report_conversion() {
   /* ─── RESPONSIVE ─── */
   @media (max-width: 1024px) {
     .adv-grid { grid-template-columns: repeat(2, 1fr); }
-    .assr-grid { grid-template-columns: repeat(2, 1fr); }
-    .assr-card.featured { grid-column: span 1; }
+    .assr-gallery { max-width: 700px; }
     .pricing-grid { grid-template-columns: 1fr 1fr; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
   }
@@ -1636,8 +1662,10 @@ function gtag_report_conversion() {
     .hero-right { display: none; }
 
     .adv-grid { grid-template-columns: 1fr; }
-    .assr-grid { grid-template-columns: 1fr; }
-    .assr-special { grid-template-columns: 1fr; }
+    .assr-tabs { gap: 6px; }
+    .assr-tab { font-size: 12px; padding: 8px 16px; }
+    .assr-gallery-wrap { padding-bottom: 75%; }
+    .warehouse-gallery-wrap { padding-bottom: 75%; }
 
     .how-steps {
       grid-template-columns: 1fr 1fr;
@@ -1745,7 +1773,7 @@ function gtag_report_conversion() {
     background: #000000; /* Чорний фон */
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-  .assr-img-featured .carousel-wrap { padding-bottom: 100%; }
+  /* assr gallery uses its own layout */
   .carousel-track {
     position: absolute;
     top: 0;
@@ -1809,10 +1837,7 @@ function gtag_report_conversion() {
     width: 24px;
     border-radius: 4px;
   }
-  .assr-percent { 
-    z-index: 11;
-    pointer-events: none;
-  }
+  /* gallery counter z-index handled inline */
 
   /* ─── VIDEO CAROUSEL ─── */
   .video-carousel-wrap {
@@ -2072,6 +2097,7 @@ function gtag_report_conversion() {
       <li><a href="#assortment">Асортимент</a></li>
       <li><a href="#pricing">Ціни</a></li>
       <li><a href="#delivery">Доставка</a></li>
+      <li><a href="#warehouse">Склад</a></li>
       <li><a href="#video">Відео</a></li>
       <li><a href="/blog/">Блог</a></li>
       <li><a href="#contact" class="nav-cta">Замовити зараз</a></li>
@@ -2129,6 +2155,7 @@ function gtag_report_conversion() {
   <a href="#assortment" onclick="closeMobileMenu()">Асортимент</a>
   <a href="#pricing" onclick="closeMobileMenu()">Ціни</a>
   <a href="#delivery" onclick="closeMobileMenu()">Доставка</a>
+  <a href="#warehouse" onclick="closeMobileMenu()">Склад</a>
   <a href="#video" onclick="closeMobileMenu()">Відеоогляди</a>
   <a href="/blog/" onclick="closeMobileMenu()">Блог</a>
   <a href="#contact" onclick="closeMobileMenu()">Контакти</a>
@@ -2315,160 +2342,88 @@ function gtag_report_conversion() {
 <!-- ═══════════════════════════════════════════
      ASSORTMENT
 ═══════════════════════════════════════════ -->
-<section class="assortment" id="assortment">
+<section class="assortment" id="assortment" aria-label="Асортимент товарів Bric-a-Brac">
   <div class="section-inner">
     <div class="assr-header reveal">
       <div class="section-label">Асортимент</div>
       <h2 class="section-title">Що є у наших коробках</h2>
       <p class="section-desc">
-        Справжній британський Bric-a-Brac — різноманіття товарів, 
+        Справжній британський Bric-a-Brac — різноманіття товарів,
         серед яких часто трапляється вінтаж та колекційні речі.
       </p>
     </div>
 
-    <div class="assr-grid">
-      <!-- Main categories -->
-      <div class="assr-card featured reveal reveal-delay-1">
-        <div class="assr-img assr-img-featured" style="padding:0; display:block;">
-          <div class="carousel-wrap" style="border-radius:0;">
-            <div class="carousel-track" id="carousel-posud">
-              <img class="carousel-slide" src="posud-1.webp" alt="Британський вінтажний посуд оптом — чашки та тарілки L-TEX" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="posud-2.webp" alt="Колекційна порцеляна з Великобританії оптом" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="posud-3.webp" alt="Вінтажна британська кераміка та порцеляна оптом" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="posud-4.webp" alt="Вінтажні вази та статуетки з Британії оптом" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="posud-5.webp" alt="Британська кераміка та порцеляна гуртом — L-TEX" width="800" height="800" loading="lazy">
-            </div>
-            <button class="carousel-btn prev" onclick="moveCarousel('posud',-1)">&#8249;</button>
-            <button class="carousel-btn next" onclick="moveCarousel('posud',1)">&#8250;</button>
-            <div class="carousel-dots" id="dots-posud">
-              <button class="carousel-dot active" onclick="goToSlide('posud',0)" aria-label="Слайд посуд 1"></button>
-              <button class="carousel-dot" onclick="goToSlide('posud',1)" aria-label="Слайд посуд 2"></button>
-              <button class="carousel-dot" onclick="goToSlide('posud',2)" aria-label="Слайд посуд 3"></button>
-              <button class="carousel-dot" onclick="goToSlide('posud',3)" aria-label="Слайд посуд 4"></button>
-              <button class="carousel-dot" onclick="goToSlide('posud',4)" aria-label="Слайд посуд 5"></button>
-            </div>
-            <div class="assr-percent">40%</div>
-          </div>
-        </div>
-        <div class="assr-body">
-          <div class="assr-name">Посуд, кераміка та порцеляна</div>
-          <div class="assr-desc">Чашки, тарілки, блюдця, вази, статуетки. Часто трапляються колекційні набори та вінтажна порцеляна відомих британських виробників.</div>
-          <div class="assr-tags">
-            <span class="assr-tag">Вінтаж</span>
-            <span class="assr-tag">Колекційний</span>
-            <span class="assr-tag">Британські фабрики</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="assr-card reveal reveal-delay-2">
-        <div class="assr-img" style="padding:0; display:block;">
-          <div class="carousel-wrap" style="border-radius:0;">
-            <div class="carousel-track" id="carousel-dekor">
-              <img class="carousel-slide" src="dekor-1.webp" alt="Вінтажний декор з Британії оптом — свічники та фігурки" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="dekor-2.webp" alt="Британські рамки та інтер'єрний декор гуртом" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="dekor-3.webp" alt="Декоративні фігурки та картини з Великобританії оптом" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="dekor-4.webp" alt="Вінтажний інтер'єр та прикраси оптом — L-TEX" width="800" height="800" loading="lazy">
-            </div>
-            <button class="carousel-btn prev" onclick="moveCarousel('dekor',-1)">&#8249;</button>
-            <button class="carousel-btn next" onclick="moveCarousel('dekor',1)">&#8250;</button>
-            <div class="carousel-dots" id="dots-dekor">
-              <button class="carousel-dot active" onclick="goToSlide('dekor',0)" aria-label="Слайд декор 1"></button>
-              <button class="carousel-dot" onclick="goToSlide('dekor',1)" aria-label="Слайд декор 2"></button>
-              <button class="carousel-dot" onclick="goToSlide('dekor',2)" aria-label="Слайд декор 3"></button>
-              <button class="carousel-dot" onclick="goToSlide('dekor',3)" aria-label="Слайд декор 4"></button>
-            </div>
-            <div class="assr-percent">30%</div>
-          </div>
-        </div>
-        <div class="assr-body">
-          <div class="assr-name">Декор та прикраси</div>
-          <div class="assr-desc">Свічники, рамки, фігурки, картини, елементи інтер'єру.</div>
-          <div class="assr-tags">
-            <span class="assr-tag">Декор</span>
-            <span class="assr-tag">Інтер'єр</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="assr-card reveal reveal-delay-3">
-        <div class="assr-img" style="padding:0; display:block;">
-          <div class="carousel-wrap" style="border-radius:0;">
-            <div class="carousel-track" id="carousel-tehnika">
-              <img class="carousel-slide" src="tehnika-1.webp" alt="Дрібна побутова техніка з Британії оптом — L-TEX" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="tehnika-2.webp" alt="Британська техніка та канцелярія гуртом" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="tehnika-3.webp" alt="Офісне приладдя та техніка з Великобританії" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="tehnika-4.webp" alt="Побутова техніка секонд хенд з UK оптом" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="tehnika-5.webp" alt="Секонд хенд техніка оптом з UK — L-TEX" width="800" height="800" loading="lazy">
-            </div>
-            <button class="carousel-btn prev" onclick="moveCarousel('tehnika',-1)">&#8249;</button>
-            <button class="carousel-btn next" onclick="moveCarousel('tehnika',1)">&#8250;</button>
-            <div class="carousel-dots" id="dots-tehnika">
-              <button class="carousel-dot active" onclick="goToSlide('tehnika',0)" aria-label="Слайд техніка 1"></button>
-              <button class="carousel-dot" onclick="goToSlide('tehnika',1)" aria-label="Слайд техніка 2"></button>
-              <button class="carousel-dot" onclick="goToSlide('tehnika',2)" aria-label="Слайд техніка 3"></button>
-              <button class="carousel-dot" onclick="goToSlide('tehnika',3)" aria-label="Слайд техніка 4"></button>
-              <button class="carousel-dot" onclick="goToSlide('tehnika',4)" aria-label="Слайд техніка 5"></button>
-            </div>
-            <div class="assr-percent">20%</div>
-          </div>
-        </div>
-        <div class="assr-body">
-          <div class="assr-name">Техніка та канцелярія</div>
-          <div class="assr-desc">Дрібна побутова техніка, канцелярські товари, офісне приладдя.</div>
-          <div class="assr-tags">
-            <span class="assr-tag">Побутова техніка</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="assr-card reveal reveal-delay-4">
-        <div class="assr-img" style="padding:0; display:block;">
-          <div class="carousel-wrap" style="border-radius:0;">
-            <div class="carousel-track" id="carousel-bij">
-              <img class="carousel-slide" src="bijuteriya-1.webp" alt="Біжутерія з Великобританії оптом для TikTok стримерів" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="bijuteriya-2.webp" alt="Британська біжутерія та аксесуари гуртом — L-TEX" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="bijuteriya-4.webp" alt="Бижутерія оптом з UK — хіт продажів для онлайн-продавців" width="800" height="800" loading="lazy">
-              <img class="carousel-slide" src="bijuteriya-5.webp" alt="Аксесуари та прикраси з Великобританії для перепродажу" width="800" height="800" loading="lazy">
-            </div>
-            <button class="carousel-btn prev" onclick="moveCarousel('bij',-1)">&#8249;</button>
-            <button class="carousel-btn next" onclick="moveCarousel('bij',1)">&#8250;</button>
-            <div class="carousel-dots" id="dots-bij">
-              <button class="carousel-dot active" onclick="goToSlide('bij',0)" aria-label="Слайд біжутерія 1"></button>
-              <button class="carousel-dot" onclick="goToSlide('bij',1)" aria-label="Слайд біжутерія 2"></button>
-              <button class="carousel-dot" onclick="goToSlide('bij',2)" aria-label="Слайд біжутерія 3"></button>
-              <button class="carousel-dot" onclick="goToSlide('bij',3)" aria-label="Слайд біжутерія 4"></button>
-            </div>
-            <div class="assr-percent">10%</div>
-          </div>
-        </div>
-        <div class="assr-body">
-          <div class="assr-name">Біжутерія, косметика, гігієна</div>
-          <div class="assr-desc">Найпопулярніша категорія серед онлайн-продавців та TikTok стримерів.</div>
-          <div class="assr-tags">
-            <span class="assr-tag">🔥 Хіт продажів</span>
-          </div>
-        </div>
-      </div>
+    <!-- Category tabs -->
+    <div class="assr-tabs reveal" role="tablist" aria-label="Категорії товарів">
+      <button class="assr-tab active" role="tab" aria-selected="true" aria-controls="gallery-bricabrac" onclick="switchCategory('bricabrac')">Bric-a-Brac</button>
+      <button class="assr-tab" role="tab" aria-selected="false" aria-controls="gallery-hardtoys" onclick="switchCategory('hardtoys')">Hard Toys</button>
+      <button class="assr-tab" role="tab" aria-selected="false" aria-controls="gallery-xmas" onclick="switchCategory('xmas')">Новорічний Bric-a-Brac</button>
     </div>
 
-    <!-- Special categories -->
-    <div class="assr-special reveal" style="margin-top:16px">
-      <div class="assr-special-item">
-        <div class="assr-special-icon">🧸</div>
-        <div class="assr-special-name">Тверді іграшки</div>
-        <div class="assr-special-desc">Окрема категорія. Сортовані тверді іграшки з UK</div>
+    <!-- Bric-a-Brac gallery -->
+    <div class="assr-gallery reveal" id="gallery-bricabrac" role="tabpanel">
+      <div class="assr-gallery-wrap">
+        <div class="assr-gallery-track" id="track-bricabrac">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-01.webp" alt="Bric-a-Brac з Британії оптом — вміст коробки L-TEX, посуд, декор, вінтаж" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-02.webp" alt="Британський Bric-a-Brac гуртом — кераміка, статуетки, дрібниці" width="567" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-03.webp" alt="Оптові коробки Bric-a-Brac з UK — різноманітний вміст" width="567" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-04.webp" alt="Bric-a-Brac оптом Україна — приклад товарів з коробки" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-05.webp" alt="Bric-a-Brac L-TEX — вінтажні речі з Великобританії" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-06.webp" alt="Bric-a-Brac з Англії — побутові товари та декор оптом" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-07.webp" alt="Оптовий Bric-a-Brac — колекційні предмети з UK" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-08.webp" alt="Bric-a-Brac коробки оптом — різноманітний асортимент" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-09.webp" alt="Bric-a-Brac гуртом з Британії — посуд та аксесуари" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-10.webp" alt="Bric-a-Brac оптом — вінтажний посуд та сувеніри з UK" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-11.webp" alt="Bric-a-Brac L-TEX — товари для перепродажу з Великобританії" width="567" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-12.webp" alt="Bric-a-Brac оптом — реальне фото вмісту коробки" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-13.webp" alt="Вміст коробки Bric-a-Brac з Британії — L-TEX" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-14.webp" alt="Bric-a-Brac оптом Україна — фото реального товару" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-15.webp" alt="Оптові поставки Bric-a-Brac — приклад коробки" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-16.webp" alt="Bric-a-Brac з UK — асортимент в коробці L-TEX" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-17.webp" alt="Bric-a-Brac гуртом — реальні фото товару з Британії" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-18.webp" alt="Коробка Bric-a-Brac оптом — різноманіття товарів" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-19.webp" alt="Bric-a-Brac з Великобританії оптом — фото товарів" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-20.webp" alt="Оптовий Bric-a-Brac L-TEX — реальний вміст коробки" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/bric%20a%20brac/bric-a-brac-mix-21.webp" alt="Bric-a-Brac оптом — британські товари для перепродажу" width="900" height="1200" loading="lazy">
+        </div>
+        <div class="assr-gallery-counter" id="counter-bricabrac">1 / 21</div>
+        <div class="assr-gallery-label">Bric-a-Brac — класичний мікс</div>
       </div>
-      <div class="assr-special-item">
-        <div class="assr-special-icon">🎄</div>
-        <div class="assr-special-name">Новорічний Bric-a-Brac</div>
-        <div class="assr-special-desc">Новорічна тематика: іграшки, декор, сувеніри</div>
+      <button class="carousel-btn prev" onclick="moveGallery('bricabrac',-1)" aria-label="Попереднє фото">&#8249;</button>
+      <button class="carousel-btn next" onclick="moveGallery('bricabrac',1)" aria-label="Наступне фото">&#8250;</button>
+    </div>
+
+    <!-- Hard Toys gallery -->
+    <div class="assr-gallery reveal" id="gallery-hardtoys" role="tabpanel" style="display:none">
+      <div class="assr-gallery-wrap">
+        <div class="assr-gallery-track" id="track-hardtoys">
+          <img class="assr-gallery-slide" src="images/hard%20toys/hard-toys-uk-01.webp" alt="Тверді іграшки з Британії оптом — Hard Toys L-TEX" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/hard%20toys/hard-toys-uk-02.webp" alt="Hard Toys оптом з UK — сортовані тверді іграшки" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/hard%20toys/hard-toys-uk-03.webp" alt="Тверді іграшки секонд хенд з Великобританії гуртом" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/hard%20toys/hard-toys-uk-04.webp" alt="Оптові тверді іграшки Hard Toys з Британії — L-TEX" width="900" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/hard%20toys/hard-toys-uk-05.webp" alt="Hard Toys — реальне фото твердих іграшок з UK" width="900" height="1200" loading="lazy">
+        </div>
+        <div class="assr-gallery-counter" id="counter-hardtoys">1 / 5</div>
+        <div class="assr-gallery-label">Hard Toys — сортовані тверді іграшки</div>
       </div>
-      <div class="assr-special-item">
-        <div class="assr-special-icon">🛋️</div>
-        <div class="assr-special-name">Габаритний Bric-a-Brac</div>
-        <div class="assr-special-desc">Побутова техніка, меблі, дитячі товари, картини</div>
+      <button class="carousel-btn prev" onclick="moveGallery('hardtoys',-1)" aria-label="Попереднє фото">&#8249;</button>
+      <button class="carousel-btn next" onclick="moveGallery('hardtoys',1)" aria-label="Наступне фото">&#8250;</button>
+    </div>
+
+    <!-- Xmas Bric-a-Brac gallery -->
+    <div class="assr-gallery reveal" id="gallery-xmas" role="tabpanel" style="display:none">
+      <div class="assr-gallery-wrap">
+        <div class="assr-gallery-track" id="track-xmas">
+          <img class="assr-gallery-slide" src="images/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D1%96%D1%87%D0%BD%D0%B8%D0%B9%20Bric-a-Brac/christmas-bric-a-brac-01.webp" alt="Новорічний Bric-a-Brac з Британії оптом — різдвяний декор" width="1200" height="1003" loading="lazy">
+          <img class="assr-gallery-slide" src="images/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D1%96%D1%87%D0%BD%D0%B8%D0%B9%20Bric-a-Brac/christmas-bric-a-brac-02.webp" alt="Різдвяні товари оптом з UK — новорічні іграшки та сувеніри" width="1063" height="1200" loading="lazy">
+          <img class="assr-gallery-slide" src="images/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D1%96%D1%87%D0%BD%D0%B8%D0%B9%20Bric-a-Brac/christmas-bric-a-brac-03.webp" alt="Новорічний Bric-a-Brac L-TEX — святковий декор з Великобританії" width="1200" height="900" loading="lazy">
+          <img class="assr-gallery-slide" src="images/%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D1%96%D1%87%D0%BD%D0%B8%D0%B9%20Bric-a-Brac/christmas-bric-a-brac-04.webp" alt="Оптові новорічні товари Bric-a-Brac з Британії" width="1001" height="1200" loading="lazy">
+        </div>
+        <div class="assr-gallery-counter" id="counter-xmas">1 / 4</div>
+        <div class="assr-gallery-label">Новорічний Bric-a-Brac — святковий мікс</div>
       </div>
+      <button class="carousel-btn prev" onclick="moveGallery('xmas',-1)" aria-label="Попереднє фото">&#8249;</button>
+      <button class="carousel-btn next" onclick="moveGallery('xmas',1)" aria-label="Наступне фото">&#8250;</button>
     </div>
   </div>
 </section>
@@ -2664,6 +2619,43 @@ function gtag_report_conversion() {
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     WAREHOUSE GALLERY
+═══════════════════════════════════════════ -->
+<section class="warehouse" id="warehouse" aria-label="Фото складу L-TEX">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Наш склад</div>
+      <h2 class="section-title">Де зберігається ваш товар</h2>
+      <p class="section-desc">Власний склад з організованим зберіганням. Кожна коробка готова до відправки в день замовлення.</p>
+    </div>
+
+    <div class="warehouse-gallery reveal" id="gallery-warehouse">
+      <div class="warehouse-gallery-wrap">
+        <div class="warehouse-gallery-track" id="track-warehouse">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-01.webp" alt="Склад L-TEX — організоване зберігання коробок Bric-a-Brac" width="1200" height="675" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-02.webp" alt="Склад Bric-a-Brac в Україні — стелажі з товаром" width="1200" height="675" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-03.webp" alt="Оптовий склад L-TEX — зона комплектації замовлень" width="1200" height="675" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-04.webp" alt="Склад Bric-a-Brac — коробки готові до відправки" width="1200" height="675" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-05.webp" alt="Складські приміщення L-TEX — зберігання товару з UK" width="675" height="1200" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-06.webp" alt="Склад L-TEX — організація зберігання Bric-a-Brac" width="675" height="1200" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-07.webp" alt="Оптовий склад Bric-a-Brac — великий вибір коробок" width="900" height="1200" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-08.webp" alt="Склад L-TEX — поточний запас товару Bric-a-Brac" width="900" height="1200" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-09.webp" alt="Складське приміщення Bric-a-Brac оптом — L-TEX Україна" width="900" height="1200" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-10.webp" alt="Склад L-TEX — зберігання оптового Bric-a-Brac з Британії" width="900" height="1200" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-11.webp" alt="Оптовий склад Bric-a-Brac в Україні — товар у наявності" width="900" height="1200" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-12.webp" alt="Склад L-TEX — палети з Bric-a-Brac для оптових клієнтів" width="1200" height="900" loading="lazy">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-13.webp" alt="Складське приміщення L-TEX — готовий до відправки товар" width="900" height="1200" loading="lazy">
+        </div>
+        <div class="warehouse-counter" id="counter-warehouse">1 / 13</div>
+      </div>
+      <button class="carousel-btn prev" onclick="moveGallery('warehouse',-1)" aria-label="Попереднє фото складу">&#8249;</button>
+      <button class="carousel-btn next" onclick="moveGallery('warehouse',1)" aria-label="Наступне фото складу">&#8250;</button>
     </div>
   </div>
 </section>
@@ -3082,6 +3074,7 @@ function gtag_report_conversion() {
           <li><a href="#assortment">Асортимент</a></li>
           <li><a href="#pricing">Ціни</a></li>
           <li><a href="#delivery">Доставка</a></li>
+          <li><a href="#warehouse">Склад</a></li>
           <li><a href="#video">Відеоогляди</a></li>
           <li><a href="/blog/">Блог</a></li>
           <li><a href="#contact">Контакти</a></li>
@@ -3267,48 +3260,64 @@ function gtag_report_conversion() {
     updateCarousel(id);
   }
 
-  initCarousel('posud', 5);
-  initCarousel('dekor', 4);
-  initCarousel('tehnika', 5);
-  initCarousel('bij', 4);
+  // ─── PHOTO GALLERY (assortment + warehouse) ───
+  const galleryState = {
+    bricabrac: { current: 0, total: 21 },
+    hardtoys: { current: 0, total: 5 },
+    xmas: { current: 0, total: 4 },
+    warehouse: { current: 0, total: 13 }
+  };
 
-  // ─── TOUCH SUPPORT FOR CAROUSELS ───
-  function addCarouselSwipe(id) {
-    const el = document.getElementById('carousel-' + id);
+  function updateGallery(id) {
+    const track = document.getElementById('track-' + id);
+    const counter = document.getElementById('counter-' + id);
+    const s = galleryState[id];
+    if (track) track.style.transform = `translateX(-${s.current * 100}%)`;
+    if (counter) counter.textContent = `${s.current + 1} / ${s.total}`;
+  }
+
+  function moveGallery(id, dir) {
+    const s = galleryState[id];
+    s.current = (s.current + dir + s.total) % s.total;
+    updateGallery(id);
+  }
+
+  function switchCategory(id) {
+    document.querySelectorAll('.assr-tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    document.querySelectorAll('.assr-gallery[role="tabpanel"]').forEach(g => {
+      g.style.display = 'none';
+    });
+    const btn = document.querySelector(`[aria-controls="gallery-${id}"]`);
+    if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+    const panel = document.getElementById('gallery-' + id);
+    if (panel) panel.style.display = '';
+  }
+
+  // ─── TOUCH SUPPORT FOR GALLERIES ───
+  function addGallerySwipe(id) {
+    const el = document.getElementById('track-' + id);
     if (!el) return;
-    
-    let startX = 0;
-    let isDragging = false;
-    
+    let startX = 0, isDragging = false;
     el.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
       isDragging = true;
     }, { passive: true });
-    
     el.addEventListener('touchend', (e) => {
       if (!isDragging) return;
-      const endX = e.changedTouches[0].clientX;
-      const diff = startX - endX;
-      
-      if (Math.abs(diff) > 50) { // swipe threshold
-        if (diff > 0) {
-          moveCarousel(id, 1); // swipe left = next
-        } else {
-          moveCarousel(id, -1); // swipe right = prev
-        }
-      }
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) moveGallery(id, diff > 0 ? 1 : -1);
       isDragging = false;
     }, { passive: true });
-    
-    el.addEventListener('touchcancel', () => {
-      isDragging = false;
-    });
+    el.addEventListener('touchcancel', () => { isDragging = false; });
   }
-  
-  addCarouselSwipe('posud');
-  addCarouselSwipe('dekor');
-  addCarouselSwipe('tehnika');
-  addCarouselSwipe('bij');
+
+  addGallerySwipe('bricabrac');
+  addGallerySwipe('hardtoys');
+  addGallerySwipe('xmas');
+  addGallerySwipe('warehouse');
 
   // ─── VIDEO CAROUSEL ───
   let videoCurrent = 0;
