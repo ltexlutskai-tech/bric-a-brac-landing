@@ -2054,6 +2054,30 @@ function gtag_report_conversion() {
   }
 </style>
 <style>
+  /* ─── FAQ SECTION ─── */
+  .faq-section { padding: 100px 0; background: var(--gray); }
+  .faq-grid { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: white; border: 1px solid var(--gray2); border-radius: 12px;
+    overflow: hidden; transition: all 0.3s ease;
+  }
+  .faq-item[open] { border-color: rgba(76,175,80,0.4); box-shadow: 0 4px 20px rgba(76,175,80,0.08); }
+  .faq-question {
+    padding: 20px 24px; font-size: 16px; font-weight: 700; color: var(--black);
+    cursor: pointer; list-style: none; display: flex; align-items: center;
+    justify-content: space-between; gap: 16px; transition: color 0.2s;
+  }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::after { content: '+'; font-size: 22px; font-weight: 300; color: var(--green); transition: transform 0.3s; flex-shrink: 0; }
+  .faq-item[open] .faq-question::after { content: '−'; }
+  .faq-question:hover { color: var(--green); }
+  .faq-answer { padding: 0 24px 20px; }
+  .faq-answer p { font-size: 15px; color: #555; line-height: 1.8; }
+  @media (max-width: 768px) {
+    .faq-question { font-size: 15px; padding: 16px 18px; }
+    .faq-answer { padding: 0 18px 16px; }
+  }
+
   /* ─── STICKY CALL BUTTON ─── */
   .sticky-call {
     display: none;
@@ -2638,10 +2662,10 @@ function gtag_report_conversion() {
     <div class="warehouse-gallery reveal" id="gallery-warehouse">
       <div class="warehouse-gallery-wrap">
         <div class="warehouse-gallery-track" id="track-warehouse">
+          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-04.webp" alt="Склад Bric-a-Brac — коробки готові до відправки" width="1200" height="675" loading="lazy">
           <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-01.webp" alt="Склад L-TEX — організоване зберігання коробок Bric-a-Brac" width="675" height="1200" loading="lazy">
           <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-02.webp" alt="Склад Bric-a-Brac в Україні — стелажі з товаром" width="675" height="1200" loading="lazy">
           <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-03.webp" alt="Оптовий склад L-TEX — зона комплектації замовлень" width="675" height="1200" loading="lazy">
-          <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-04.webp" alt="Склад Bric-a-Brac — коробки готові до відправки" width="1200" height="675" loading="lazy">
           <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-05.webp" alt="Складські приміщення L-TEX — зберігання товару з UK" width="675" height="1200" loading="lazy">
           <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-06.webp" alt="Склад L-TEX — організація зберігання Bric-a-Brac" width="675" height="1200" loading="lazy">
           <img class="warehouse-gallery-slide" src="%D0%A4%D0%BE%D1%82%D0%BE%20%D1%81%D0%BA%D0%BB%D0%B0%D0%B4%D1%83/warehouse-ltex-07.webp" alt="Оптовий склад Bric-a-Brac — великий вибір коробок" width="900" height="1200" loading="lazy">
@@ -2833,6 +2857,75 @@ function gtag_report_conversion() {
     </div>
 
 
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FAQ SECTION
+═══════════════════════════════════════════ -->
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <div class="section-label reveal">Часті питання</div>
+    <h2 class="section-title reveal">Що таке брік-брак<br>і як замовити</h2>
+
+    <div class="faq-grid reveal">
+      <details class="faq-item" open>
+        <summary class="faq-question">Що таке брік-брак (bric-a-brac)?</summary>
+        <div class="faq-answer">
+          <p>Брік-брак (bric-a-brac) — це різноманітний мікс нових і частково вживаних речей з Великобританії, який включає посуд, декор, текстиль, іграшки, косметику та дрібну техніку. Цей формат відрізняється від звичайного секонд-хенду тим, що містить значну частку нових товарів та речей у відмінному стані. Термін походить з вікторіанської Британії (близько 1840 року) та буквально означає «різноманітні цікаві дрібнички».</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">Чим брік-брак відрізняється від секонд-хенду?</summary>
+        <div class="faq-answer">
+          <p>Звичайний секонд-хенд — це переважно вживаний одяг і взуття. Брік-брак — це мікс товарів для дому: посуд, декор, техніка, іграшки, біжутерія, косметика. У брік-браку значна частина товарів нові або в ідеальному стані, а маржинальність вища — від 100% до 500% на окремих позиціях.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">Яка мінімальна кількість для замовлення?</summary>
+        <div class="faq-answer">
+          <p>Мінімальне замовлення — 1 коробка вагою 15–20 кг. Це ідеально для тестового замовлення. Далі ви можете замовляти від 250 кг (мінілот), палетами по 500 кг або повну фуру. Чим більше обсяг — тим нижча ціна за кілограм.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">Скільки коштує брік-брак оптом?</summary>
+        <div class="faq-answer">
+          <p>Ціна залежить від обсягу замовлення: від 4.25€/кг за 1 коробку до 3.60€/кг за палету (500 кг). При замовленні фури ціна ще вигідніша. Ми пропонуємо прозоре ціноутворення без прихованих комісій. Доставка в 9 областей Західної України — безкоштовно.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">Що входить до коробки з брік-браком?</summary>
+        <div class="faq-answer">
+          <p>Типова коробка містить мікс категорій: порцеляновий та керамічний посуд, декоративні предмети, м'які та тверді іграшки, біжутерію, косметику, дрібну побутову техніку, текстиль, свічки, вінтажні знахідки. Ви можете дивитись відеоогляди кожного лоту на нашому YouTube-каналі перед замовленням.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">Чи підходить брік-брак для TikTok-стримінгу?</summary>
+        <div class="faq-answer">
+          <p>Так, брік-брак — один з найпопулярніших форматів для TikTok-стримів з розпакуванням. Різноманітність товарів у кожній коробці створює ефект «розпакування подарунку», що тримає глядачів на стрімі. Середній чек з одного стріму може сягати 3000–10000 грн.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">Куди здійснюється безкоштовна доставка?</summary>
+        <div class="faq-answer">
+          <p>Безкоштовна доставка діє в 9 областей Західної України: Волинська, Рівненська, Львівська, Івано-Франківська, Тернопільська, Хмельницька, Чернівецька, Вінницька та Житомирська. Доставка в інші регіони — за тарифами перевізника.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">Як зробити замовлення?</summary>
+        <div class="faq-answer">
+          <p>Залиште заявку на сайті або зателефонуйте нам за номером +38 (067) 705-69-03 (Viber, Telegram). Наш менеджер зв'яжеться з вами протягом 30 хвилин, допоможе підібрати оптимальний лот і організує доставку. Від запиту до отримання товару — зазвичай 2–5 робочих днів.</p>
+        </div>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -3440,7 +3533,7 @@ function gtag_report_conversion() {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "L-TEX",
-  "description": "Оптові поставки Bric-a-Brac та секонд-хенду з Великобританії в Україну. Від 1 коробки до повної фури.",
+  "description": "Оптові поставки брік-брак (bric-a-brac) та секонд-хенду з Великобританії в Україну. Від 1 коробки до повної фури. Посуд, декор, іграшки, техніка, вінтаж.",
   "url": "https://bricabrac.com.ua",
   "telephone": "+380677056903",
   "email": "info@bricabrac.com.ua",
@@ -3490,6 +3583,79 @@ function gtag_report_conversion() {
     "ratingValue": "5",
     "reviewCount": "3000"
   }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Що таке брік-брак (bric-a-brac)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Брік-брак (bric-a-brac) — це різноманітний мікс нових і частково вживаних речей з Великобританії, який включає посуд, декор, текстиль, іграшки, косметику та дрібну техніку. Цей формат відрізняється від звичайного секонд-хенду тим, що містить значну частку нових товарів та речей у відмінному стані."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Чим брік-брак відрізняється від секонд-хенду?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Звичайний секонд-хенд — це переважно вживаний одяг і взуття. Брік-брак — це мікс товарів для дому: посуд, декор, техніка, іграшки, біжутерія, косметика. У брік-браку значна частина товарів нові або в ідеальному стані, а маржинальність вища — від 100% до 500% на окремих позиціях."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Скільки коштує брік-брак оптом?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ціна залежить від обсягу замовлення: від 4.25€/кг за 1 коробку до 3.60€/кг за палету (500 кг). При замовленні фури ціна ще вигідніша. Доставка в 9 областей Західної України — безкоштовно."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Що входить до коробки з брік-браком?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Типова коробка містить мікс категорій: порцеляновий та керамічний посуд, декоративні предмети, м'які та тверді іграшки, біжутерію, косметику, дрібну побутову техніку, текстиль, свічки, вінтажні знахідки."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Чи підходить брік-брак для TikTok-стримінгу?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Так, брік-брак — один з найпопулярніших форматів для TikTok-стримів з розпакуванням. Різноманітність товарів у кожній коробці створює ефект «розпакування подарунку», що тримає глядачів на стрімі."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Куди здійснюється безкоштовна доставка?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Безкоштовна доставка діє в 9 областей Західної України: Волинська, Рівненська, Львівська, Івано-Франківська, Тернопільська, Хмельницька, Чернівецька, Вінницька та Житомирська."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Яка мінімальна кількість для замовлення?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Мінімальне замовлення — 1 коробка вагою 15–20 кг. Далі ви можете замовляти від 250 кг (мінілот), палетами по 500 кг або повну фуру."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Як зробити замовлення?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Залиште заявку на сайті або зателефонуйте за номером +38 (067) 705-69-03 (Viber, Telegram). Наш менеджер зв'яжеться з вами протягом 30 хвилин, допоможе підібрати оптимальний лот і організує доставку."
+      }
+    }
+  ]
 }
 </script>
 
