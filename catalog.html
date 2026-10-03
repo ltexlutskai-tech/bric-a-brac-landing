@@ -1100,6 +1100,29 @@
     .popup-social-links { flex-direction: column; }
   }
 </style>
+<script>
+// Заявки йдуть ОДРАЗУ в систему L-TEX (стають лідами в менеджерці).
+// Formspree (лист на пошту) — запасний шлях: лише якщо система не відповіла.
+window.ltexSendLead = async function (form, data) {
+  try {
+    const r = await fetch('https://ltex.com.ua/api/public/site-form', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    const j = await r.json().catch(() => null);
+    if (r.ok && j && j.success !== false) return r;
+    throw new Error((j && j.message) || ('HTTP ' + r.status));
+  } catch (err) {
+    console.warn('[forms] L-TEX недоступна, запасний шлях:', err);
+    return fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+  }
+};
+</script>
 </head>
 <body>
 
@@ -1658,11 +1681,7 @@
     data.set('comment', document.getElementById('mComment').value.trim());
 
     try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
+      const res = await window.ltexSendLead(form, data);
 
       if (res.ok) {
         btnText.textContent = '✅ Заявку надіслано!';
@@ -1867,11 +1886,7 @@
     const data = new FormData(form);
     
     try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
+      const res = await window.ltexSendLead(form, data);
       
       if (res.ok) {
         successMsg.classList.add('show');
