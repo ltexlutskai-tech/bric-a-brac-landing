@@ -2101,6 +2101,135 @@ function gtag_report_conversion() {
   .sticky-call:hover { background: #388E3C; transform: translateY(-2px); }
   @media (max-width: 768px) { .sticky-call { display: flex; } }
 </style>
+<script>
+// ─── ЗАЯВКИ → CRM L-TEX (Р-240) ───
+// Кожна форма сайту шле заявку ОДРАЗУ в CRM L-TEX (https://ltex.com.ua,
+// /api/public/site-form) — там вона стає лідом і йде менеджеру за областю,
+// як заявки з ltex.com.ua. Старий обробник (Formspree — лист на пошту) — ЗАПАСНИЙ:
+// лише якщо CRM не відповіла; така копія позначена «НЕ В CRM».
+// TODO(Р-240): прибрати запасний шлях, коли ліди стабільно йдуть у CRM.
+// Обидва шляхи не відповіли — заявка чекає в браузері й піде в CRM при
+// наступному відкритті сторінки (нічого не губимо).
+(function () {
+  var CRM_URL = 'https://ltex.com.ua/api/public/site-form';
+  var QUEUE_KEY = 'ltex_pending_leads';
+  var UTM_KEY = 'ltex_utm';
+  var UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+  // UTM з адреси; без них — ті, що запамʼятали на вході в цю сесію.
+  var utm = {};
+  try {
+    var q = new URLSearchParams(location.search), found = false;
+    UTM_FIELDS.forEach(function (k) { var v = q.get(k); if (v) { utm[k] = v.slice(0, 200); found = true; } });
+    if (found) sessionStorage.setItem(UTM_KEY, JSON.stringify(utm));
+    else utm = JSON.parse(sessionStorage.getItem(UTM_KEY) || '{}') || {};
+  } catch (e) { utm = {}; }
+  var referrer = '';
+  try {
+    referrer = sessionStorage.getItem('ltex_ref') || document.referrer || '';
+    if (document.referrer && document.referrer.indexOf(location.host) === -1) {
+      sessionStorage.setItem('ltex_ref', document.referrer);
+      referrer = document.referrer;
+    }
+  } catch (e) { referrer = document.referrer || ''; }
+
+  // Телефон у вигляді +380XXXXXXXXX (CRM і сама нормалізує, це для запасного листа).
+  function normPhone(raw) {
+    var s = String(raw || '').trim(), d = s.replace(/\D/g, '');
+    if (d.length === 12 && d.indexOf('380') === 0) return '+' + d;
+    if (d.length === 11 && d.indexOf('80') === 0) return '+3' + d;
+    if (d.length === 10 && d.charAt(0) === '0') return '+38' + d;
+    if (d.length === 9) return '+380' + d;
+    return s;
+  }
+
+  function toPairs(fd) {
+    var out = [];
+    fd.forEach(function (v, k) { if (typeof v === 'string') out.push([k, v]); });
+    return out;
+  }
+  function toForm(pairs) {
+    var fd = new FormData();
+    pairs.forEach(function (p) { fd.append(p[0], p[1]); });
+    return fd;
+  }
+
+  function postCrm(pairs) {
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
+    return fetch(CRM_URL, {
+      method: 'POST',
+      body: toForm(pairs),
+      headers: { 'Accept': 'application/json' },
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (r) {
+      return r.json().catch(function () { return null; }).then(function (j) {
+        if (timer) clearTimeout(timer);
+        if (r.ok && j && j.success !== false) return j;
+        var err = new Error((j && j.message) || ('HTTP ' + r.status));
+        err.status = r.status;
+        throw err;
+      });
+    }, function (e) { if (timer) clearTimeout(timer); throw e; });
+  }
+
+  function queue(pairs) {
+    try {
+      var list = JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]') || [];
+      list.push({ t: Date.now(), pairs: pairs });
+      localStorage.setItem(QUEUE_KEY, JSON.stringify(list.slice(-5)));
+    } catch (e) {}
+  }
+  // Дослати заявки, що не пішли минулого разу (не старші 7 днів).
+  function flushQueue() {
+    var list;
+    try { list = JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]') || []; } catch (e) { return; }
+    if (!list.length) return;
+    try { localStorage.removeItem(QUEUE_KEY); } catch (e) {}
+    list.forEach(function (item) {
+      if (!item || !item.pairs || Date.now() - item.t > 7 * 864e5) return;
+      postCrm(item.pairs.concat([['_retry', '1']])).catch(function () { queue(item.pairs); });
+    });
+  }
+  setTimeout(flushQueue, 3000);
+
+  /**
+   * Надіслати заявку. form — елемент форми (його id стає `_form`), data —
+   * FormData. Відповідь: { ok: true, via: 'crm' | 'fallback' } або
+   * { ok: false, message } — тоді людині показуємо помилку.
+   */
+  window.ltexSendLead = function (form, data) {
+    var fd = data || new FormData(form);
+    if (form && form.id && !fd.get('_form')) fd.set('_form', form.id);
+    if (fd.get('phone')) fd.set('phone', normPhone(fd.get('phone')));
+    fd.set('_page', location.href.split('#')[0].slice(0, 500));
+    fd.set('_title', document.title.slice(0, 200));
+    if (referrer) fd.set('_referrer', referrer.slice(0, 500));
+    UTM_FIELDS.forEach(function (k) { if (utm[k] && !fd.get(k)) fd.set(k, utm[k]); });
+    var pairs = toPairs(fd);
+
+    return postCrm(pairs).then(function () {
+      return { ok: true, via: 'crm' };
+    }, function (err) {
+      console.warn('[forms] CRM L-TEX не прийняла заявку, запасний шлях:', err);
+      // Мережа/сервер — дошлемо в CRM пізніше; 400/429 — ні (CRM вже сказала «ні»).
+      if (!err || !err.status || err.status >= 500) queue(pairs);
+      return (function (form, fd, err) {
+        // Запасний лист через Formspree (адреса — у action форми).
+        fd.set('_subject', '⚠️ НЕ В CRM — ' + (fd.get('_subject') || 'Заявка з сайту'));
+        fd.set('crm_error', String((err && err.message) || ''));
+        return fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+          .then(function (r) { return r.ok; });
+      })(form, toForm(pairs), err).then(function (ok) {
+        return ok ? { ok: true, via: 'fallback' }
+          : { ok: false, message: (err && err.message) || 'немає звʼязку' };
+      }, function () {
+        return { ok: false, message: (err && err.message) || 'немає звʼязку' };
+      });
+    });
+  };
+})();
+</script>
 </head>
 
 <body>
@@ -3038,6 +3167,7 @@ function gtag_report_conversion() {
         <div class="form-title">📦 Залишити заявку на товар</div>
 
         <form id="orderForm" action="https://formspree.io/f/mreajbgj" method="POST" novalidate>
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="form-row">
             <div class="form-group">
               <label for="name">Ім'я або назва компанії *</label>
@@ -3288,11 +3418,7 @@ function gtag_report_conversion() {
     const data = new FormData(form);
 
     try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
+      const res = await window.ltexSendLead(form, data);
 
       if (res.ok) {
         formSuccess.style.display = 'block';
@@ -3730,6 +3856,7 @@ function gtag_report_conversion() {
     
     <div class="popup-body">
       <form id="popupForm" action="https://formspree.io/f/mreajbgj" method="POST">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="popup-form-group">
           <label for="popup-name">Ім'я або назва компанії *</label>
           <input type="text" id="popup-name" name="name" placeholder="Ваше ім'я" required>
@@ -3844,11 +3971,7 @@ function gtag_report_conversion() {
     const data = new FormData(form);
     
     try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
+      const res = await window.ltexSendLead(form, data);
       
       if (res.ok) {
         successMsg.classList.add('show');
