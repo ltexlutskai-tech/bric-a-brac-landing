@@ -1142,6 +1142,61 @@
     return s;
   }
 
+  // Р-240в: номер перевіряємо ДО надсилання тією ж логікою, що й CRM —
+  // після нормалізації має бути український +380XXXXXXXXX (10 цифр 0XXXXXXXXX).
+  // Інакше CRM відповість 400 «bad_phone», а заявку не створить.
+  var PHONE_MSG = 'Перевірте номер — 10 цифр, напр. 067 123 45 67';
+  function phoneValid(raw) { return /^\+380\d{9}$/.test(normPhone(raw)); }
+  function phoneInput(form) {
+    return form && form.querySelector ? form.querySelector('input[name="phone"], input[type="tel"]') : null;
+  }
+  // Повідомлення під полем телефону (bad_phone) або над кнопкою форми.
+  function showFormError(form, msg, nearPhone) {
+    if (!form || !form.querySelector) return false;
+    var input = nearPhone ? phoneInput(form) : null;
+    var cls = input ? 'ltex-phone-err' : 'ltex-form-err';
+    var anchor = input || form.querySelector('[type="submit"], button:not([type="button"])');
+    var el = form.querySelector('.' + cls);
+    if (!el) {
+      el = document.createElement('div');
+      el.className = cls;
+      el.setAttribute('role', 'alert');
+      el.style.cssText = 'color:#d32f2f;font-size:13px;line-height:1.35;margin:6px 0;text-align:left;';
+      if (input) input.insertAdjacentElement('afterend', el);
+      else if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(el, anchor);
+      else form.appendChild(el);
+    }
+    el.textContent = msg;
+    el.style.display = '';
+    if (input) {
+      input.setAttribute('aria-invalid', 'true');
+      input.style.borderColor = '#d32f2f';
+      if (!input._ltexErrHook) {
+        input._ltexErrHook = true;
+        input.addEventListener('input', function () {
+          el.style.display = 'none';
+          input.removeAttribute('aria-invalid');
+          input.style.borderColor = '';
+        });
+      }
+      try { input.focus(); } catch (e) {}
+    }
+    return true;
+  }
+  /**
+   * Перевірити номер у формі ДО будь-яких дій (вікно Telegram, каталог…).
+   * Невалідний — показує повідомлення під полем і повертає його текст;
+   * валідний — null.
+   */
+  window.ltexCheckPhone = function (form, raw) {
+    var input = phoneInput(form);
+    var value = raw != null ? raw : (input ? input.value : '');
+    var old = form && form.querySelector ? form.querySelector('.ltex-phone-err') : null;
+    if (phoneValid(value)) { if (old) old.style.display = 'none'; return null; }
+    showFormError(form, PHONE_MSG, true);
+    return PHONE_MSG;
+  };
+
   function toPairs(fd) {
     var out = [];
     fd.forEach(function (v, k) { if (typeof v === 'string') out.push([k, v]); });
@@ -1167,6 +1222,7 @@
         if (r.ok && j && j.success !== false) return j;
         var err = new Error((j && j.message) || ('HTTP ' + r.status));
         err.status = r.status;
+        err.code = (j && j.code) || null;
         throw err;
       });
     }, function (e) { if (timer) clearTimeout(timer); throw e; });
@@ -1187,7 +1243,9 @@
     try { localStorage.removeItem(QUEUE_KEY); } catch (e) {}
     list.forEach(function (item) {
       if (!item || !item.pairs || Date.now() - item.t > 7 * 864e5) return;
-      postCrm(item.pairs.concat([['_retry', '1']])).catch(function () { queue(item.pairs); });
+      postCrm(item.pairs.concat([['_retry', '1']])).catch(function (err) {
+        if (!err || !err.status || err.status >= 500) queue(item.pairs);
+      });
     });
   }
   setTimeout(flushQueue, 3000);
@@ -1195,10 +1253,17 @@
   /**
    * Надіслати заявку. form — елемент форми (його id стає `_form`), data —
    * FormData. Відповідь: { ok: true, via: 'crm' | 'fallback' } або
-   * { ok: false, message } — тоді людині показуємо помилку.
+   * { ok: false, message } — тоді людині показуємо помилку. Р-240в: невалідний
+   * номер — { ok: false, code: 'bad_phone', message, shown: true } без запиту;
+   * CRM відповіла 400 — { ok: false, code, message, shown: true } без резерву
+   * (shown — повідомлення вже видно у формі).
    */
   window.ltexSendLead = function (form, data) {
     var fd = data || new FormData(form);
+    if (!phoneValid(fd.get('phone'))) {
+      return Promise.resolve({ ok: false, code: 'bad_phone', message: PHONE_MSG,
+        shown: showFormError(form, PHONE_MSG, true) });
+    }
     if (form && form.id && !fd.get('_form')) fd.set('_form', form.id);
     if (fd.get('phone')) fd.set('phone', normPhone(fd.get('phone')));
     fd.set('_page', location.href.split('#')[0].slice(0, 500));
@@ -1210,8 +1275,15 @@
     return postCrm(pairs).then(function () {
       return { ok: true, via: 'crm' };
     }, function (err) {
+      // Р-240в: 400 — CRM відмовила через дані (номер, імʼя): показуємо її
+      // повідомлення людині; резерв і черга лише для 5xx/мережі/таймауту.
+      if (err && err.status === 400) {
+        var msg = err.message || PHONE_MSG;
+        return { ok: false, code: err.code || 'bad_request', message: msg,
+          shown: showFormError(form, msg, err.code === 'bad_phone') };
+      }
       console.warn('[forms] CRM L-TEX не прийняла заявку, запасний шлях:', err);
-      // Мережа/сервер — дошлемо в CRM пізніше; 400/429 — ні (CRM вже сказала «ні»).
+      // Мережа/сервер — дошлемо в CRM пізніше; 4xx — ні (CRM вже сказала «ні»).
       if (!err || !err.status || err.status >= 500) queue(pairs);
       return (function (form, fd, err) {
         // Запасний лист через Formspree (адреса — у action форми).
@@ -1803,6 +1875,8 @@
         });
       return;
     }
+    // Р-240в: номер — 10 цифр; невалідний — повідомлення під полем, нічого не шлемо.
+    if (window.ltexCheckPhone && window.ltexCheckPhone(document.getElementById('modalForm'), phone)) return;
 
     const btn = document.getElementById('modalSubmitBtn');
     const btnText = document.getElementById('modalBtnText');
@@ -2017,6 +2091,8 @@
       alert('❌ Будь ласка, заповніть всі обов\'язкові поля');
       return;
     }
+    // Р-240в: номер — 10 цифр; невалідний — повідомлення під полем, нічого не шлемо.
+    if (window.ltexCheckPhone && window.ltexCheckPhone(form)) return;
     
     // Відкриваємо Telegram одразу при натисканні
     window.open('https://t.me/LTEX_Bric', '_blank');
