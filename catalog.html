@@ -1101,27 +1101,133 @@
   }
 </style>
 <script>
-// Заявки йдуть ОДРАЗУ в систему L-TEX (стають лідами в менеджерці).
-// Formspree (лист на пошту) — запасний шлях: лише якщо система не відповіла.
-window.ltexSendLead = async function (form, data) {
+// ─── ЗАЯВКИ → CRM L-TEX (Р-240) ───
+// Кожна форма сайту шле заявку ОДРАЗУ в CRM L-TEX (https://ltex.com.ua,
+// /api/public/site-form) — там вона стає лідом і йде менеджеру за областю,
+// як заявки з ltex.com.ua. Старий обробник (Formspree — лист на пошту) — ЗАПАСНИЙ:
+// лише якщо CRM не відповіла; така копія позначена «НЕ В CRM».
+// TODO(Р-240): прибрати запасний шлях, коли ліди стабільно йдуть у CRM.
+// Обидва шляхи не відповіли — заявка чекає в браузері й піде в CRM при
+// наступному відкритті сторінки (нічого не губимо).
+(function () {
+  var CRM_URL = 'https://ltex.com.ua/api/public/site-form';
+  var QUEUE_KEY = 'ltex_pending_leads';
+  var UTM_KEY = 'ltex_utm';
+  var UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+  // UTM з адреси; без них — ті, що запамʼятали на вході в цю сесію.
+  var utm = {};
   try {
-    const r = await fetch('https://ltex.com.ua/api/public/site-form', {
+    var q = new URLSearchParams(location.search), found = false;
+    UTM_FIELDS.forEach(function (k) { var v = q.get(k); if (v) { utm[k] = v.slice(0, 200); found = true; } });
+    if (found) sessionStorage.setItem(UTM_KEY, JSON.stringify(utm));
+    else utm = JSON.parse(sessionStorage.getItem(UTM_KEY) || '{}') || {};
+  } catch (e) { utm = {}; }
+  var referrer = '';
+  try {
+    referrer = sessionStorage.getItem('ltex_ref') || document.referrer || '';
+    if (document.referrer && document.referrer.indexOf(location.host) === -1) {
+      sessionStorage.setItem('ltex_ref', document.referrer);
+      referrer = document.referrer;
+    }
+  } catch (e) { referrer = document.referrer || ''; }
+
+  // Телефон у вигляді +380XXXXXXXXX (CRM і сама нормалізує, це для запасного листа).
+  function normPhone(raw) {
+    var s = String(raw || '').trim(), d = s.replace(/\D/g, '');
+    if (d.length === 12 && d.indexOf('380') === 0) return '+' + d;
+    if (d.length === 11 && d.indexOf('80') === 0) return '+3' + d;
+    if (d.length === 10 && d.charAt(0) === '0') return '+38' + d;
+    if (d.length === 9) return '+380' + d;
+    return s;
+  }
+
+  function toPairs(fd) {
+    var out = [];
+    fd.forEach(function (v, k) { if (typeof v === 'string') out.push([k, v]); });
+    return out;
+  }
+  function toForm(pairs) {
+    var fd = new FormData();
+    pairs.forEach(function (p) { fd.append(p[0], p[1]); });
+    return fd;
+  }
+
+  function postCrm(pairs) {
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
+    return fetch(CRM_URL, {
       method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-    const j = await r.json().catch(() => null);
-    if (r.ok && j && j.success !== false) return r;
-    throw new Error((j && j.message) || ('HTTP ' + r.status));
-  } catch (err) {
-    console.warn('[forms] L-TEX недоступна, запасний шлях:', err);
-    return fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
+      body: toForm(pairs),
+      headers: { 'Accept': 'application/json' },
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (r) {
+      return r.json().catch(function () { return null; }).then(function (j) {
+        if (timer) clearTimeout(timer);
+        if (r.ok && j && j.success !== false) return j;
+        var err = new Error((j && j.message) || ('HTTP ' + r.status));
+        err.status = r.status;
+        throw err;
+      });
+    }, function (e) { if (timer) clearTimeout(timer); throw e; });
+  }
+
+  function queue(pairs) {
+    try {
+      var list = JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]') || [];
+      list.push({ t: Date.now(), pairs: pairs });
+      localStorage.setItem(QUEUE_KEY, JSON.stringify(list.slice(-5)));
+    } catch (e) {}
+  }
+  // Дослати заявки, що не пішли минулого разу (не старші 7 днів).
+  function flushQueue() {
+    var list;
+    try { list = JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]') || []; } catch (e) { return; }
+    if (!list.length) return;
+    try { localStorage.removeItem(QUEUE_KEY); } catch (e) {}
+    list.forEach(function (item) {
+      if (!item || !item.pairs || Date.now() - item.t > 7 * 864e5) return;
+      postCrm(item.pairs.concat([['_retry', '1']])).catch(function () { queue(item.pairs); });
     });
   }
-};
+  setTimeout(flushQueue, 3000);
+
+  /**
+   * Надіслати заявку. form — елемент форми (його id стає `_form`), data —
+   * FormData. Відповідь: { ok: true, via: 'crm' | 'fallback' } або
+   * { ok: false, message } — тоді людині показуємо помилку.
+   */
+  window.ltexSendLead = function (form, data) {
+    var fd = data || new FormData(form);
+    if (form && form.id && !fd.get('_form')) fd.set('_form', form.id);
+    if (fd.get('phone')) fd.set('phone', normPhone(fd.get('phone')));
+    fd.set('_page', location.href.split('#')[0].slice(0, 500));
+    fd.set('_title', document.title.slice(0, 200));
+    if (referrer) fd.set('_referrer', referrer.slice(0, 500));
+    UTM_FIELDS.forEach(function (k) { if (utm[k] && !fd.get(k)) fd.set(k, utm[k]); });
+    var pairs = toPairs(fd);
+
+    return postCrm(pairs).then(function () {
+      return { ok: true, via: 'crm' };
+    }, function (err) {
+      console.warn('[forms] CRM L-TEX не прийняла заявку, запасний шлях:', err);
+      // Мережа/сервер — дошлемо в CRM пізніше; 400/429 — ні (CRM вже сказала «ні»).
+      if (!err || !err.status || err.status >= 500) queue(pairs);
+      return (function (form, fd, err) {
+        // Запасний лист через Formspree (адреса — у action форми).
+        fd.set('_subject', '⚠️ НЕ В CRM — ' + (fd.get('_subject') || 'Заявка з сайту'));
+        fd.set('crm_error', String((err && err.message) || ''));
+        return fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+          .then(function (r) { return r.ok; });
+      })(form, toForm(pairs), err).then(function (ok) {
+        return ok ? { ok: true, via: 'fallback' }
+          : { ok: false, message: (err && err.message) || 'немає звʼязку' };
+      }, function () {
+        return { ok: false, message: (err && err.message) || 'немає звʼязку' };
+      });
+    });
+  };
+})();
 </script>
 </head>
 <body>
@@ -1558,6 +1664,7 @@ window.ltexSendLead = async function (form, data) {
     </div>
 
     <form id="modalForm" action="https://formspree.io/f/xvzbkvvp" method="POST" novalidate>
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input type="hidden" id="modalProductCode" name="product_code">
       <input type="hidden" id="modalProductNameHidden" name="product_name">
       <input type="hidden" id="modalProductPriceHidden" name="product_price">
@@ -1572,6 +1679,37 @@ window.ltexSendLead = async function (form, data) {
           <label for="mPhone">Телефон *</label>
           <input type="tel" id="mPhone" name="phone" placeholder="+380__________" required>
         </div>
+      </div>
+
+      <div class="form-group">
+        <label for="mRegion">Область *</label>
+        <select id="mRegion" name="region" required>
+            <option value="" disabled selected>Оберіть область</option>
+            <option value="Вінницька">Вінницька</option>
+            <option value="Волинська">Волинська</option>
+            <option value="Дніпропетровська">Дніпропетровська</option>
+            <option value="Донецька">Донецька</option>
+            <option value="Житомирська">Житомирська</option>
+            <option value="Закарпатська">Закарпатська</option>
+            <option value="Запорізька">Запорізька</option>
+            <option value="Івано-Франківська">Івано-Франківська</option>
+            <option value="Київська">Київська</option>
+            <option value="Кіровоградська">Кіровоградська</option>
+            <option value="Луганська">Луганська</option>
+            <option value="Львівська">Львівська</option>
+            <option value="Миколаївська">Миколаївська</option>
+            <option value="Одеська">Одеська</option>
+            <option value="Полтавська">Полтавська</option>
+            <option value="Рівненська">Рівненська</option>
+            <option value="Сумська">Сумська</option>
+            <option value="Тернопільська">Тернопільська</option>
+            <option value="Харківська">Харківська</option>
+            <option value="Херсонська">Херсонська</option>
+            <option value="Хмельницька">Хмельницька</option>
+            <option value="Черкаська">Черкаська</option>
+            <option value="Чернівецька">Чернівецька</option>
+            <option value="Чернігівська">Чернігівська</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -1594,7 +1732,7 @@ window.ltexSendLead = async function (form, data) {
 
       <div class="form-group">
         <label for="mComment">Коментар</label>
-        <textarea id="mComment" name="comment" rows="2" placeholder="Регіон доставки, додаткові побажання..."></textarea>
+        <textarea id="mComment" name="comment" rows="2" placeholder="Місто доставки, додаткові побажання..."></textarea>
       </div>
 
       <button type="submit" class="modal-submit" id="modalSubmitBtn">
@@ -1653,9 +1791,10 @@ window.ltexSendLead = async function (form, data) {
     const name = document.getElementById('mName').value.trim();
     const phone = document.getElementById('mPhone').value.trim();
     const volume = document.getElementById('mVolume').value;
+    const region = document.getElementById('mRegion').value;
 
-    if (!name || !phone || !volume) {
-      [document.getElementById('mName'), document.getElementById('mPhone'), document.getElementById('mVolume')]
+    if (!name || !phone || !volume || !region) {
+      [document.getElementById('mName'), document.getElementById('mPhone'), document.getElementById('mVolume'), document.getElementById('mRegion')]
         .forEach(el => {
           if (!el.value.trim()) {
             el.style.borderColor = '#EF5350';
@@ -1678,6 +1817,7 @@ window.ltexSendLead = async function (form, data) {
     data.set('phone', phone);
     data.set('messenger', document.getElementById('mMessenger').value.trim());
     data.set('volume', volume);
+    data.set('region', region);
     data.set('comment', document.getElementById('mComment').value.trim());
 
     try {
@@ -1772,6 +1912,7 @@ window.ltexSendLead = async function (form, data) {
     
     <div class="popup-body">
       <form id="popupForm" action="https://formspree.io/f/mreajbgj" method="POST">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="popup-form-group">
           <label for="popup-name">Ім'я або назва компанії *</label>
           <input type="text" id="popup-name" name="name" placeholder="Ваше ім'я" required>
