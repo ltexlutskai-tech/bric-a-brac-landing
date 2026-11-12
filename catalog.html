@@ -1210,11 +1210,26 @@
 
   function postCrm(pairs) {
     var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
+    // Р-281: форма часто відкриває каталог / Telegram у новій вкладці, і телефон
+    // «заморожує» цю сторінку. Таймер 12 с тоді спрацьовував на повернення і
+    // обривав запит, що вже йшов, — заявка йшла в резерв «⚠️ НЕ В CRM».
+    // Тепер: keepalive (браузер доводить запит до кінця навіть у фоні), а
+    // таймер рахує лише час, поки сторінку видно.
+    var waited = 0, timer = null;
+    function tick() {
+      timer = setTimeout(function () {
+        if (typeof document !== 'undefined' && document.hidden) { tick(); return; }
+        waited += 1000;
+        if (waited >= 12000) { if (ctrl) ctrl.abort(); return; }
+        tick();
+      }, 1000);
+    }
+    if (ctrl) tick();
     return fetch(CRM_URL, {
       method: 'POST',
       body: toForm(pairs),
       headers: { 'Accept': 'application/json' },
+      keepalive: true,
       signal: ctrl ? ctrl.signal : undefined
     }).then(function (r) {
       return r.json().catch(function () { return null; }).then(function (j) {
@@ -1287,7 +1302,7 @@
       if (!err || !err.status || err.status >= 500) queue(pairs);
       return (function (form, fd, err) {
         // Запасний лист через Formspree (адреса — у action форми).
-        fd.set('_subject', '⚠️ НЕ В CRM — ' + (fd.get('_subject') || 'Заявка з сайту'));
+        fd.set('_subject', '⚠️ НЕ В CRM (' + (err && err.status ? 'HTTP ' + err.status : (err && err.name === 'AbortError' ? 'таймаут' : 'мережа')) + ') — ' + (fd.get('_subject') || 'Заявка з сайту'));
         fd.set('crm_error', String((err && err.message) || ''));
         return fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
           .then(function (r) { return r.ok; });
@@ -2094,16 +2109,18 @@
     // Р-240в: номер — 10 цифр; невалідний — повідомлення під полем, нічого не шлемо.
     if (window.ltexCheckPhone && window.ltexCheckPhone(form)) return;
     
-    // Відкриваємо Telegram одразу при натисканні
+    // Р-281: спершу стартуємо відправку заявки, потім відкриваємо Telegram —
+    // інакше телефон «заморожує» сторінку до старту запиту, і заявка йде в
+    // резерв «⚠️ НЕ В CRM».
+    const data = new FormData(form);
+    const sending = window.ltexSendLead(form, data);
     window.open('https://t.me/LTEX_Bric', '_blank');
     
     btnText.textContent = '⏳ Відправляємо...';
     submitBtn.disabled = true;
     
-    const data = new FormData(form);
-    
     try {
-      const res = await window.ltexSendLead(form, data);
+      const res = await sending;
       
       if (res.ok) {
         successMsg.classList.add('show');
